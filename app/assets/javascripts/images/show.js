@@ -18,6 +18,16 @@ WALDO.ShowModule = (function(){
 
   function saveTag(tagger) {
     tags.push(tagger);
+    $.ajax( {
+      url: 'http://localhost:3000/images/1/tags.json',
+      method: 'post',
+      data: JSON.stringify(tagger),
+      dataType: 'json',
+      contentType: 'application/json',
+
+      success: WALDO.Tagger.renderSavedTag,
+      error: function() { console.log('error!') }
+    });
   };
 
 

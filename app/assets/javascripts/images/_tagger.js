@@ -33,6 +33,7 @@ WALDO.Tagger = (function(){
     $('.tagger').remove();
 
     tagger = new Tag(event.pageX, event.pageY);
+    console.log(event)
     tagger.render()
     tagger.showDropdown();
   };
@@ -88,12 +89,11 @@ WALDO.Tagger = (function(){
     $('.dropdown').remove();
     $('.tagger').remove();
 
-    _renderSavedTag(tagger);
   }
 
 
-  function _renderSavedTag(tag) {
-    $("<div class='tag'>" + tag.character + "</div>").appendTo($_playarea).css('left', tag.x - 24).css('top', tag.y - 24);
+  function renderSavedTag(tag) {
+    $("<div class='tag'>" + tag.character_name + "</div>").appendTo($_playarea).css('left', tag.x - 24).css('top', tag.y - 24);
   };
 
 /*
@@ -105,7 +105,8 @@ WALDO.Tagger = (function(){
   return {
     init: init,
     enable: enable,
-    disable: disable
+    disable: disable,
+    renderSavedTag: renderSavedTag
   }
 
 })();

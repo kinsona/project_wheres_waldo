@@ -5,6 +5,7 @@ class ImagesController < ApplicationController
 
 
   def show
+    @player = Player.new
   end
 
 end

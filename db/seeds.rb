@@ -28,3 +28,8 @@ CHARACTERS.each do |character_name|
   c.images << i
   c.save!
 end
+
+
+p = Player.new
+p.name = "Tester"
+p.save!
