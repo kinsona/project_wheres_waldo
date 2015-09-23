@@ -2,96 +2,105 @@ var WALDO = WALDO || {};
 
 
 WALDO.Tagger = (function(){
-  var $_image;
-  var $_tagger;
+
+  var $_playarea;
   var tagger;
   var _characters;
 
+
   function init(available_characters) {
-    $_image = $('.game-image');
+    $_playarea = $('.game-wrapper');
     _characters = available_characters;
     enable();
   };
 
 
   function enable() {
-    $_image.on('click', _buildTagger );
-    $('.image-wrapper').on('click', '.dropdown li', _saveTag );
-    $('.image-wrapper').on('mouseenter', _showTags );
-    $('.image-wrapper').on('mouseleave', _hideTags );
-  };
-
-
-  function _showTags() {
-    $('.tag').show();
-  };
-
-
-  function _hideTags() {
-    $('.tag').hide();
+    $_playarea.on('click', '.game-image', _buildTagger );
+    $_playarea.on('click', '.dropdown li', _saveTag );
+    $_playarea.on('mouseenter', function() { $('.tag').show() } );
+    $_playarea.on('mouseleave', function() { $('.tag').hide() } );
   };
 
 
   function disable() {
-    $_image.off('click');
-    $('.dropdown').off('click');
+    $_playarea.off('click');
   };
 
 
   function _buildTagger() {
+    // cancel active tagger if it exists
+    $('.tagger').remove();
+
     tagger = new Tag(event.pageX, event.pageY);
-    tagger.$html.insertAfter($_image).css('left', tagger.x - 24).css('top', tagger.y - 24);
-    $_tagger = $('.tagger');
+    tagger.render()
     tagger.showDropdown();
   };
 
 
   function Tag(x, y) {
-    this.$html = $("<div class='tagger'></div>");
     this.x = x;
     this.y = y;
   };
 
 
+  Tag.prototype.render = function() {
+    $("<div class='tagger'></div>").appendTo($_playarea).css('left', this.x - 24).css('top', this.y - 24);
+  };
 
 
   Tag.prototype.showDropdown = function() {
+    $characterList = _buildCharacterList();
+
+    var $tagger = $('.tagger');
+    $characterList.appendTo($tagger).hide().slideDown();
+
+    this.setDropdownCoordinates();
+  };
+
+
+  Tag.prototype.setDropdownCoordinates = function() {
+    if ( this.x > 0.8 * $_playarea.width()) {
+      $('.dropdown').css('right', 42);
+    } else {
+      $('.dropdown').css('left', 18);
+    };
+  };
+
+
+  function _buildCharacterList() {
     var $characterList = $("<ul class='dropdown'></ul>");
+
     _characters.forEach( function(name) {
       var $listItem = $("<li>" + name + "</li>");
       $characterList.append($listItem);
     });
 
-    $characterList.insertAfter($_tagger).hide().slideDown();
-    // should modify so that it pops out to the left side of you're near the right edge
-    $('.dropdown').css('left', tagger.x);
-    $('.dropdown').css('top', tagger.y - 24);
+    return $characterList;
   };
-
 
 
   function _saveTag() {
     tagger['character'] = event.target.innerHTML;
-
     WALDO.ShowModule.saveTag(tagger);
 
     _characters.splice(_characters.indexOf(tagger.character),1)
-    $('.dropdown').slideUp(150, this.remove);
-    $_tagger.remove();
+    $('.dropdown').remove();
+    $('.tagger').remove();
+
     _renderSavedTag(tagger);
-    //tagger = null;
-  }
-
-
-  function renderAllSavedTags(tags) {
-    tags.forEach( _renderSingleTag );
   }
 
 
   function _renderSavedTag(tag) {
-    $("<div class='tag'>" + tag.character + "</div>").appendTo($('.image-wrapper')).css('left', tag.x - 24).css('top', tag.y - 24);
+    $("<div class='tag'>" + tag.character + "</div>").appendTo($_playarea).css('left', tag.x - 24).css('top', tag.y - 24);
   };
 
+/*
+  function renderAllSavedTags(tags) {
+    tags.forEach( _renderSingleTag );
+  }
+*/
 
   return {
     init: init,

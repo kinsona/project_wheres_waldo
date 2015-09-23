@@ -21,8 +21,6 @@ WALDO.ShowModule = (function(){
   };
 
 
-
-
   return {
     init: init,
     saveTag: saveTag,

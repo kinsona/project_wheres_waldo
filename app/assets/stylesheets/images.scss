@@ -3,10 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.image-wrapper {
+.game-wrapper {
   img {
     max-width: 100%;
-    //max-height: 100%;
   }
 }
 
@@ -45,6 +44,7 @@
   position: absolute;
   border: 1px solid black;
   border-radius: 2px;
+  white-space:nowrap;
 
   li {
     padding: 1px 2px;
