@@ -1,32 +1,19 @@
 var WALDO = WALDO || {};
 
 
-WALDO.tagger = (function(){
+WALDO.ShowModule = (function(){
 
   function init() {
-    this.enable();
+    WALDO.Tagger.init();
   };
-
-
-  function enable() {
-    $('.game-image').on('click', buildTagger )
-  };
-
-
-  function disable() {
-    
-  };
-
-
 
   return {
-    init: init,
-    enable: enable,
-    disable: disable
+    init: init
   }
 
 })();
 
+
 $(document).ready(function(){
-  WALDO.tagger.init();
+  WALDO.ShowModule.init();
 })

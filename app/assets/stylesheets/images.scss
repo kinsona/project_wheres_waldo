@@ -9,3 +9,36 @@
     //max-height: 100%;
   }
 }
+
+
+.tagger {
+  height: 48px;
+  width: 48px;
+  border: 3px solid blue;
+  border-radius: 8px;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+
+.dropdown {
+  padding: 0;
+  margin: 0 0 0 24px;
+  list-style-position: inside;
+  list-style-type: none;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 2px;
+
+  li {
+    padding: 1px 2px;
+    font-size: 16px;
+    line-height: 1em;
+    background-color: lightblue;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: lightgray;
+  }
+}
