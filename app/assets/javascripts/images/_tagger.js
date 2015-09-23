@@ -32,8 +32,10 @@ WALDO.Tagger = (function(){
     // cancel active tagger if it exists
     $('.tagger').remove();
 
-    tagger = new Tag(event.pageX, event.pageY);
-    console.log(event)
+    var x = event.offsetX / $_playarea.width();
+    var y = event.offsetY / $_playarea.height();
+    tagger = new Tag(x, y);
+
     tagger.render()
     tagger.showDropdown();
   };
@@ -46,7 +48,10 @@ WALDO.Tagger = (function(){
 
 
   Tag.prototype.render = function() {
-    $("<div class='tagger'></div>").appendTo($_playarea).css('left', this.x - 24).css('top', this.y - 24);
+    var pixelX = this.x * $_playarea.width() + $_playarea.offset().left - 24;
+    var pixelY = this.y * $_playarea.height() + $_playarea.offset().top - 24;
+
+    $("<div class='tagger'></div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
   };
 
 
@@ -61,7 +66,7 @@ WALDO.Tagger = (function(){
 
 
   Tag.prototype.setDropdownCoordinates = function() {
-    if ( this.x > 0.8 * $_playarea.width()) {
+    if (this.x > 0.8) {
       $('.dropdown').css('right', 42);
     } else {
       $('.dropdown').css('left', 18);
@@ -93,20 +98,23 @@ WALDO.Tagger = (function(){
 
 
   function renderSavedTag(tag) {
-    $("<div class='tag'>" + tag.character_name + "</div>").appendTo($_playarea).css('left', tag.x - 24).css('top', tag.y - 24);
+    var pixelX = tag.x * $_playarea.width() + $_playarea.offset().left - 24;
+    var pixelY = tag.y * $_playarea.height() + $_playarea.offset().top - 24;
+    $("<div class='tag'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
   };
 
-/*
+
   function renderAllSavedTags(tags) {
-    tags.forEach( _renderSingleTag );
+    tags.forEach( renderSavedTag );
   }
-*/
+
 
   return {
     init: init,
     enable: enable,
     disable: disable,
-    renderSavedTag: renderSavedTag
+    renderSavedTag: renderSavedTag,
+    renderAllSavedTags: renderAllSavedTags
   }
 
 })();

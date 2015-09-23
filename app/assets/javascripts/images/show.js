@@ -13,13 +13,13 @@ WALDO.ShowModule = (function(){
     CHARACTERS = ['Waldo', 'Wenda', 'Odlaw', 'Wizard Whitebeard', 'Woof'];
     AVAILABLE_CHARACTERS = CHARACTERS;
     WALDO.Tagger.init(AVAILABLE_CHARACTERS);
+    getTags();
   };
 
 
   function saveTag(tagger) {
-    tags.push(tagger);
     $.ajax( {
-      url: 'http://localhost:3000/images/1/tags.json',
+      url: 'http://localhost:3000/images/7/tags.json',
       method: 'post',
       data: JSON.stringify(tagger),
       dataType: 'json',
@@ -31,10 +31,21 @@ WALDO.ShowModule = (function(){
   };
 
 
+  function getTags() {
+    $.ajax( {
+      url: 'http://localhost:3000/images/7/tags.json',
+      method: 'get',
+
+      success: WALDO.Tagger.renderAllSavedTags,
+      error: function() { console.log('error!') }
+    });
+  };
+
+
   return {
     init: init,
     saveTag: saveTag,
-    getTags: function(){ return tags }
+    getTags: getTags
   }
 
 })();
