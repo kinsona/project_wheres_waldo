@@ -13,7 +13,7 @@ WALDO.ShowModule = (function(){
     CHARACTERS = ['Waldo', 'Wenda', 'Odlaw', 'Wizard Whitebeard', 'Woof'];
     AVAILABLE_CHARACTERS = CHARACTERS;
     WALDO.Tagger.init(AVAILABLE_CHARACTERS);
-    getTags();
+    _getTags();
   };
 
 
@@ -31,7 +31,7 @@ WALDO.ShowModule = (function(){
   };
 
 
-  function getTags() {
+  function _getTags() {
     $.ajax( {
       url: 'http://localhost:3000/images/7/tags.json',
       method: 'get',
@@ -42,10 +42,22 @@ WALDO.ShowModule = (function(){
   };
 
 
+  function deleteTag(id) {
+    $.ajax( {
+      url: "http://localhost:3000/images/7/tags/" + id + ".json",
+      method: 'delete',
+
+      success: WALDO.Tagger.removeSavedTag,
+      error: function() { console.log('error!') }
+    })
+  }
+
+
   return {
     init: init,
     saveTag: saveTag,
-    getTags: getTags
+    //_getTags: _getTags,
+    deleteTag: deleteTag
   }
 
 })();

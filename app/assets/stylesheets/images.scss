@@ -28,6 +28,7 @@
   border-radius: 8px;
   position: absolute;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 
@@ -57,4 +58,9 @@
   li:hover {
     background-color: lightgray;
   }
+}
+
+
+.delete-prompt {
+  border-color: red;
 }

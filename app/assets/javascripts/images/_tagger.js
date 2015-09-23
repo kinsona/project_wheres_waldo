@@ -11,19 +11,20 @@ WALDO.Tagger = (function(){
   function init(available_characters) {
     $_playarea = $('.game-wrapper');
     _characters = available_characters;
-    enable();
+    _enable();
   };
 
 
-  function enable() {
+  function _enable() {
     $_playarea.on('click', '.game-image', _buildTagger );
     $_playarea.on('click', '.dropdown li', _saveTag );
+    $_playarea.on('click', '.tag', _promptDelete );
     $_playarea.on('mouseenter', function() { $('.tag').show() } );
     $_playarea.on('mouseleave', function() { $('.tag').hide() } );
   };
 
 
-  function disable() {
+  function _disable() {
     $_playarea.off('click');
   };
 
@@ -100,21 +101,42 @@ WALDO.Tagger = (function(){
   function renderSavedTag(tag) {
     var pixelX = tag.x * $_playarea.width() + $_playarea.offset().left - 24;
     var pixelY = tag.y * $_playarea.height() + $_playarea.offset().top - 24;
-    $("<div class='tag'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
+    $("<div class='tag' data-tag-id='" + tag.id + "'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
   };
 
 
   function renderAllSavedTags(tags) {
     tags.forEach( renderSavedTag );
-  }
+  };
+
+
+  function _promptDelete() {
+    var $tag = $(event.target);
+    $tag.addClass('delete-prompt');
+
+    if ( confirm('Delete this tag?') ){
+      WALDO.ShowModule.deleteTag($tag.attr('data-tag-id'));
+    } else {
+      $tag.removeClass('delete-prompt')
+    };
+  };
+
+
+
+  function removeSavedTag(id) {
+    $("div[data-tag-id='" + id + "']").remove()
+  };
+
+
 
 
   return {
     init: init,
-    enable: enable,
-    disable: disable,
+    //_enable: _enable,
+    //_disable: _disable,
     renderSavedTag: renderSavedTag,
-    renderAllSavedTags: renderAllSavedTags
+    renderAllSavedTags: renderAllSavedTags,
+    removeSavedTag: removeSavedTag
   }
 
 })();

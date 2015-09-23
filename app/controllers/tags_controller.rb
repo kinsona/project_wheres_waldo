@@ -9,8 +9,6 @@ class TagsController < ApplicationController
     @tag.character = Character.find_by_name(params[:character])
 
     if @tag.save
-      #tag_data = JSON.parse(@tag.to_json)
-      #tag_data["character_name"] = @tag.character.name
       tag_data = @tag.to_json(:include => :character)
 
       respond_to do |format|
@@ -32,6 +30,21 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => tag_data, :status => 200 }
+    end
+  end
+
+
+  def destroy
+    @tag = Tag.find(params[:id])
+
+    if @tag.destroy
+      respond_to do |format|
+        format.json { render :json => params[:id], :status => 200 }
+      end
+    else
+      respond_to do |format|
+        format.json { render :nothing => true, :status => :unprocessable_entity }
+      end
     end
   end
 
