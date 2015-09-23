@@ -56,7 +56,6 @@ WALDO.ShowModule = (function(){
   return {
     init: init,
     saveTag: saveTag,
-    //_getTags: _getTags,
     deleteTag: deleteTag
   }
 

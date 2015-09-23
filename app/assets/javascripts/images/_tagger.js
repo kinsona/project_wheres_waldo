@@ -132,8 +132,6 @@ WALDO.Tagger = (function(){
 
   return {
     init: init,
-    //_enable: _enable,
-    //_disable: _disable,
     renderSavedTag: renderSavedTag,
     renderAllSavedTags: renderAllSavedTags,
     removeSavedTag: removeSavedTag
