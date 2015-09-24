@@ -40,12 +40,33 @@ WALDO.Characters = (function() {
   };
 
 
+  function removeAvailable(name) {
+    return available.splice(available.indexOf(name),1)
+  };
+
+
+  function addAvailable(id) {
+    var character = findCharacter(id);
+    if (available.indexOf(character) === -1) {
+      available.push(character);
+    };
+  };
+
+
+  function getAvailableNames() {
+    return available.map( function(element) { return element.name} );
+  };
+
+
   return {
     init: init,
     getCharacters: function() { return characters },
     setCharacters: setCharacters,
     getAvailable: function() { return available },
+    getAvailableNames: getAvailableNames,
     setAvailable: setAvailable,
+    removeAvailable: removeAvailable,
+    addAvailable: addAvailable,
     getNames: getNames,
     getName: getName
   }

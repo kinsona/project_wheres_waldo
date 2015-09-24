@@ -21,6 +21,11 @@ WALDO.Tags = (function() {
   };
 
 
+  function characterIDs() {
+    return tags.map( function(tag) { return tag.character_id } );
+  }
+
+
   function renderAll() {
     tags.forEach( render );
   };
@@ -41,6 +46,7 @@ WALDO.Tags = (function() {
     getTags: function() { return tags },
     setTags: setTags,
     ids: ids,
+    characterIDs: characterIDs,
     renderAll: renderAll,
     render: render
   }

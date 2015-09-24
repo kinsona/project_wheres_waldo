@@ -31,7 +31,7 @@ WALDO.ShowModule = (function(){
     //_tags = data.tags
     //_availableCharacters = _availableCharacters();
 
-    var taggedIDs = WALDO.Tags.ids();
+    var taggedIDs = WALDO.Tags.characterIDs();
     WALDO.Characters.setAvailable(taggedIDs);
 
     WALDO.Tagger.init(WALDO.Characters.getAvailable());

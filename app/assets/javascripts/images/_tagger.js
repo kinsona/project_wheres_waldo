@@ -10,7 +10,7 @@ WALDO.Tagger = (function(){
 
   function init(available_characters) {
     $_playarea = $('.game-wrapper');
-    _characters = available_characters;
+    _characters = WALDO.Characters.getAvailableNames();
     _enable();
   };
 
@@ -57,7 +57,7 @@ WALDO.Tagger = (function(){
 
 
   Tag.prototype.showDropdown = function() {
-    $characterList = _buildCharacterList();
+    var $characterList = _buildCharacterList();
 
     var $tagger = $('.tagger');
     $characterList.appendTo($tagger).hide().slideDown();
@@ -78,7 +78,7 @@ WALDO.Tagger = (function(){
   function _buildCharacterList() {
     var $characterList = $("<ul class='dropdown'></ul>");
 
-    _characters.forEach( function(name) {
+    WALDO.Characters.getAvailableNames().forEach( function(name) {
       var $listItem = $("<li>" + name + "</li>");
       $characterList.append($listItem);
     });
@@ -91,10 +91,10 @@ WALDO.Tagger = (function(){
     tagger['character'] = event.target.innerHTML;
     WALDO.ShowModule.saveTag(tagger);
 
-    _characters.splice(_characters.indexOf(tagger.character),1)
+    //_characters.splice(_characters.indexOf(tagger.character),1)
+
     $('.dropdown').remove();
     $('.tagger').remove();
-
   }
 
 
@@ -102,6 +102,7 @@ WALDO.Tagger = (function(){
     var pixelX = tag.x * $_playarea.width() + $_playarea.offset().left - 24;
     var pixelY = tag.y * $_playarea.height() + $_playarea.offset().top - 24;
     $("<div class='tag' data-tag-id='" + tag.id + "'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
+    WALDO.Characters.removeAvailable(tag.character)
   };
 
 
@@ -125,6 +126,7 @@ WALDO.Tagger = (function(){
 
   function removeSavedTag(id) {
     $("div[data-tag-id='" + id + "']").remove()
+    WALDO.Characters.addAvailable(id);
   };
 
 
