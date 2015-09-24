@@ -5,8 +5,8 @@ WALDO.ShowModule = (function(){
 
   var _image_id;
   var _tags;
-  var _characters;
-  var _availableCharacters;
+//  var _characters;
+//  var _availableCharacters;
 
 
   function init() {
@@ -25,11 +25,17 @@ WALDO.ShowModule = (function(){
 
 
   function _pullVariables(data) {
-    _characters = data.characters
-    _tags = data.tags
-    _availableCharacters = _availableCharacters();
+    console.log(data);
+    //_characters = data.characters;
+    WALDO.Characters.setCharacters(data.characters);
 
-    WALDO.Tagger.init(_availableCharacters);
+    _tags = data.tags
+    //_availableCharacters = _availableCharacters();
+
+    var taggedIDs = _tags.map( function(tag) { return tag.id } );
+    WALDO.Characters.setAvailable(taggedIDs);
+
+    WALDO.Tagger.init(WALDO.Characters.getAvailable());
     _getTags();
   };
 
@@ -54,7 +60,7 @@ WALDO.ShowModule = (function(){
     });
   };
 
-
+/*
   function _getNames(array) {
     return array.map( function(element) { return element.name} );
   };
@@ -70,7 +76,7 @@ WALDO.ShowModule = (function(){
       return (tagged.indexOf(c) === -1 )
     });
   }
-
+*/
 
   function saveTag(tagger) {
     $.ajax( {
