@@ -3,21 +3,37 @@ var WALDO = WALDO || {};
 
 WALDO.ShowModule = (function(){
 
-  var _image_id
-  var tags;
-  var CHARACTERS;
-  var AVAILABLE_CHARACTERS;
+  var _image_id;
+  var _tags;
+  var _characters;
+  var _availableCharacters;
 
 
   function init() {
-    _image_id = 1;
-    CHARACTERS = ['Waldo', 'Wenda', 'Odlaw', 'Wizard Whitebeard', 'Woof'];
-    AVAILABLE_CHARACTERS = CHARACTERS;
-      WALDO.Tagger.init(AVAILABLE_CHARACTERS);
-    _getTags();
+    _image_id = $('section').data('image-id');
+    _getImageData();
   };
 
 
+  function _getImageData() {
+    $.ajax( {
+      url: "http://localhost:3000/images/" + _image_id + ".json",
+      method: 'get',
+      success: _pullVariables
+    });
+  };
+
+
+  function _pullVariables(data) {
+    _characters = data.characters
+    _tags = data.tags
+    _availableCharacters = _availableCharacters();
+
+    WALDO.Tagger.init(_availableCharacters);
+    _getTags();
+  };
+
+/*
   function _getCharacters() {
     $.ajax( {
       url: "http://localhost:3000/images/" + _image_id + "/characters.json",
@@ -26,7 +42,7 @@ WALDO.ShowModule = (function(){
       success: function(data) { CHARACTERS = data }
     });
   }
-
+*/
 
   function _getTags() {
     $.ajax( {
@@ -39,9 +55,16 @@ WALDO.ShowModule = (function(){
   };
 
 
+  function _getNames(array) {
+    return array.map( function(element) { return element.name} );
+  };
+
+
   function _availableCharacters() {
-    var charnames = ch.responseJSON.map( function(c) { return c.name} );
-    var tagged = ta.responseJSON.map( function(t) { return t.name} );
+    var charnames = _getNames(_characters);
+    var tagged = _getNames(_tags);
+    // this is not working because _tags doesn't have name
+    console.log(_tags);
 
     return $.grep(charnames, function(c) {
       return (tagged.indexOf(c) === -1 )
