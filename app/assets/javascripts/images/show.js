@@ -10,12 +10,9 @@ WALDO.ShowModule = (function(){
 
 
   function init() {
-    _image_id = 7;
-    //var promise1 = _getCharacters();
-    //var promise2 = _getTags();
-    //tags = [];
+    _image_id = 1;
     CHARACTERS = ['Waldo', 'Wenda', 'Odlaw', 'Wizard Whitebeard', 'Woof'];
-    //AVAILABLE_CHARACTERS = CHARACTERS;
+    AVAILABLE_CHARACTERS = CHARACTERS;
       WALDO.Tagger.init(AVAILABLE_CHARACTERS);
     _getTags();
   };
