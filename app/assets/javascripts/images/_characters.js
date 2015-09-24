@@ -17,13 +17,18 @@ WALDO.Characters = (function() {
   };
 
 
-  function names() {
+  function getNames() {
     return characters.map( function(element) { return element.name} );
   };
 
+  function getName(id) {
+    return findCharacter(id).name;
+  };
 
-  function find(id) {
-    return $.grep( characters, function(c) { return (c.id === id) } )
+
+  function findCharacter(id) {
+    var results = $.grep( characters, function(c) { return (c.id === id) } )
+    return results[0];
   };
 
 
@@ -41,6 +46,7 @@ WALDO.Characters = (function() {
     setCharacters: setCharacters,
     getAvailable: function() { return available },
     setAvailable: setAvailable,
-    names: names
+    getNames: getNames,
+    getName: getName
   }
 })();

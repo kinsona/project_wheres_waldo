@@ -4,7 +4,7 @@ var WALDO = WALDO || {};
 WALDO.ShowModule = (function(){
 
   var _image_id;
-  var _tags;
+//  var _tags;
 //  var _characters;
 //  var _availableCharacters;
 
@@ -25,18 +25,18 @@ WALDO.ShowModule = (function(){
 
 
   function _pullVariables(data) {
-    console.log(data);
     //_characters = data.characters;
     WALDO.Characters.setCharacters(data.characters);
-
-    _tags = data.tags
+    WALDO.Tags.setTags(data.tags);
+    //_tags = data.tags
     //_availableCharacters = _availableCharacters();
 
-    var taggedIDs = _tags.map( function(tag) { return tag.id } );
+    var taggedIDs = WALDO.Tags.ids();
     WALDO.Characters.setAvailable(taggedIDs);
 
     WALDO.Tagger.init(WALDO.Characters.getAvailable());
-    _getTags();
+    //_getTags();
+    WALDO.Tags.renderAll();
   };
 
 /*
@@ -49,7 +49,7 @@ WALDO.ShowModule = (function(){
     });
   }
 */
-
+/*
   function _getTags() {
     $.ajax( {
       url: "http://localhost:3000/images/" + _image_id + "/tags.json",
@@ -59,7 +59,7 @@ WALDO.ShowModule = (function(){
       error: function() { console.log('error!') }
     });
   };
-
+*/
 /*
   function _getNames(array) {
     return array.map( function(element) { return element.name} );
