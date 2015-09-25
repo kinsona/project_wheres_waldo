@@ -5,18 +5,16 @@ WALDO.Tagger = (function(){
 
   var $_playarea;
   var tagger;
-  var _characters;
 
 
   function init(available_characters) {
     $_playarea = $('.game-wrapper');
-    _characters = WALDO.Characters.getAvailableNames();
     _enable();
   };
 
 
   function _enable() {
-    $_playarea.on('click', '.game-image', _buildTagger );
+    $_playarea.on('click', '.game-image', _toggleTagger );
     $_playarea.on('click', '.dropdown li', _saveTag );
     $_playarea.on('click', '.tag', _promptDelete );
     $_playarea.on('mouseenter', function() { $('.tag').show() } );
@@ -24,15 +22,22 @@ WALDO.Tagger = (function(){
   };
 
 
-  function _disable() {
+  function disable() {
     $_playarea.off('click');
   };
 
 
-  function _buildTagger() {
-    // cancel active tagger if it exists
-    $('.tagger').remove();
+  function _toggleTagger() {
+    var tagger = $('.tagger');
+    if (tagger.length === 0) {
+      _buildTagger()
+    } else {
+      tagger.remove();
+    };
+  };
 
+
+  function _buildTagger() {
     var x = event.offsetX / $_playarea.width();
     var y = event.offsetY / $_playarea.height();
     tagger = new Tag(x, y);
@@ -91,24 +96,9 @@ WALDO.Tagger = (function(){
     tagger['character'] = event.target.innerHTML;
     WALDO.ShowModule.saveTag(tagger);
 
-    //_characters.splice(_characters.indexOf(tagger.character),1)
-
     $('.dropdown').remove();
     $('.tagger').remove();
   }
-
-
-  function renderSavedTag(tag) {
-    var pixelX = tag.x * $_playarea.width() + $_playarea.offset().left - 24;
-    var pixelY = tag.y * $_playarea.height() + $_playarea.offset().top - 24;
-    $("<div class='tag' data-tag-id='" + tag.id + "'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
-    WALDO.Characters.removeAvailable(tag.character)
-  };
-
-
-  function renderAllSavedTags(tags) {
-    tags.forEach( renderSavedTag );
-  };
 
 
   function _promptDelete() {
@@ -125,8 +115,9 @@ WALDO.Tagger = (function(){
 
 
   function removeSavedTag(id) {
-    $("div[data-tag-id='" + id + "']").remove()
-    WALDO.Characters.addAvailable(id);
+    $tagDiv = $("div[data-tag-id='" + id + "']");
+    WALDO.Characters.addAvailable($tagDiv.text());
+    $tagDiv.remove()
   };
 
 
@@ -134,9 +125,8 @@ WALDO.Tagger = (function(){
 
   return {
     init: init,
-    renderSavedTag: renderSavedTag,
-    renderAllSavedTags: renderAllSavedTags,
-    removeSavedTag: removeSavedTag
+    removeSavedTag: removeSavedTag,
+    disable: disable
   }
 
 })();

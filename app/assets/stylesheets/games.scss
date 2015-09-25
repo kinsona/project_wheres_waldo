@@ -1,6 +1,22 @@
-// Place all the styles related to the images controller here.
+// Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+header {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 4px;
+  }
+}
+
+
+.column {
+  display: inline-block;
+  margin: 0 10px;
+  line-height: 1.5em;
+  width: 100px;
+}
 
 
 .game-wrapper {
@@ -63,4 +79,23 @@
 
 .delete-prompt {
   border-color: red;
+}
+
+
+.high-scores {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background-color: lightblue;
+  padding: 0 16px;
+  border: 2px solid #666;
+  border-radius: 4px;
+
+  h4 {
+    text-align: center;
+  }
+
+  .current {
+    background-color: yellow;
+  }
 }

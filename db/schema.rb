@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923185859) do
+ActiveRecord::Schema.define(version: 20150925024457) do
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "image_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,10 +53,10 @@ ActiveRecord::Schema.define(version: 20150923185859) do
     t.float    "x"
     t.float    "y"
     t.integer  "character_id"
-    t.integer  "image_id"
     t.integer  "player_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "game_id"
   end
 
 end
