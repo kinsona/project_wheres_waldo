@@ -105,13 +105,14 @@ WALDO.ShowModule = (function(){
     var $scoreboard = $("<div class='high-scores'></div>")
     $("<h4>Fastest Times</h4>").appendTo($scoreboard);
 
-    $scoreList = $("<ol class='score-list'></ol>")
+    var $scoreList = $("<ol class='score-list'></ol>")
     $scoreList.appendTo($scoreboard);
 
     $scoreboard.appendTo($('.game-wrapper'));
 
     scores.forEach( function(score) {
-      $scoreList.append($("<li>" + score.name + ": " + score.time + "</li>"))
+      var $listItem = $("<li data-player-id='" + score.player_id + "'></li>");
+      $listItem.text( score.name + ": " + score.time ).appendTo($scoreList);
     });
 
   }
