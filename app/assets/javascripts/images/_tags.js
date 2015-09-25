@@ -8,6 +8,9 @@ WALDO.Tags = (function() {
 
   function setTags(array) {
     tags = array;
+    window.onresize = function() {
+      _reRenderAll();
+    };
   };
 
 
@@ -30,6 +33,12 @@ WALDO.Tags = (function() {
 
   function renderAll() {
     tags.forEach( _render );
+  };
+
+
+  function _reRenderAll() {
+    $('.tag').remove()
+    renderAll();
   };
 
 

@@ -83,7 +83,6 @@ WALDO.ShowModule = (function(){
   };
 
 
-
   return {
     init: init,
     getGameID: function() { return game_id },
