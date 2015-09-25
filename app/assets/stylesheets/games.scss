@@ -80,3 +80,18 @@ header {
 .delete-prompt {
   border-color: red;
 }
+
+
+.high-scores {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background-color: lightblue;
+  padding: 0 16px;
+  border: 2px solid #666;
+  border-radius: 4px;
+
+  h4 {
+    text-align: center;
+  }
+}

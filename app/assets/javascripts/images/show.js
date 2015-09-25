@@ -85,12 +85,10 @@ WALDO.ShowModule = (function(){
 
 
   function _getHighScores(this_image_id) {
-    var param = { image_id: this_image_id }
-
     $.ajax( {
       url: "http://localhost:3000/games.json",
       method: 'get',
-      data: param,
+      data: { image_id: this_image_id },
       dataType: 'json',
       contentType: 'application/json',
 
@@ -101,6 +99,21 @@ WALDO.ShowModule = (function(){
 
   function _renderHighScores(scores) {
     console.log(scores)
+    // if this game in list, ask for player name
+    // update name in front and back ends (default 'anonymous')
+    // create a div in center of screen with a list of names/scores
+    var $scoreboard = $("<div class='high-scores'></div>")
+    $("<h4>Fastest Times</h4>").appendTo($scoreboard);
+
+    $scoreList = $("<ol class='score-list'></ol>")
+    $scoreList.appendTo($scoreboard);
+
+    $scoreboard.appendTo($('.game-wrapper'));
+
+    scores.forEach( function(score) {
+      $scoreList.append($("<li>" + score.name + ": " + score.time + "</li>"))
+    });
+
   }
 
 
