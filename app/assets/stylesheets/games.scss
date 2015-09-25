@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+header {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 4px;
+  }
+}
+
+
+.column {
+  display: inline-block;
+  margin: 0 10px;
+  line-height: 1.5em;
+  width: 100px;
+}
+
+
 .game-wrapper {
   img {
     max-width: 100%;

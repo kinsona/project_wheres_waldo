@@ -8,7 +8,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new
     @game.create_player
-    @game.start_time = @game.created_at
+    @game.start_time = Time.now
     @game.image = Image.first
 
     if @game.save
@@ -51,5 +51,16 @@ class GamesController < ApplicationController
 
     end
   end
+
+
+  # Get high scores
+  def index
+    @fastest_times = Game.fastest_times(params[:image_id])
+
+    respond_to do |format|
+      format.json { render :json => @fastest_times, :status => 200 }
+    end
+  end
+
 
 end

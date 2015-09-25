@@ -22,7 +22,7 @@ WALDO.Tagger = (function(){
   };
 
 
-  function _disable() {
+  function disable() {
     $_playarea.off('click');
   };
 
@@ -125,7 +125,8 @@ WALDO.Tagger = (function(){
 
   return {
     init: init,
-    removeSavedTag: removeSavedTag
+    removeSavedTag: removeSavedTag,
+    disable: disable
   }
 
 })();

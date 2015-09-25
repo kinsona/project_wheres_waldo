@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 =end
 
-  resources :games, :only => [:new, :create, :show, :update] do
+  resources :games, :only => [:new, :create, :show, :update, :index] do
     resources :tags, :only => [:create, :index, :destroy]
     resources :characters, :only => [:index]
   end

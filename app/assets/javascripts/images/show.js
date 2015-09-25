@@ -30,6 +30,8 @@ WALDO.ShowModule = (function(){
 
     WALDO.Tagger.init(WALDO.Characters.getAvailable());
     WALDO.Tags.renderAll();
+
+    WALDO.Timer.startTimer();
   };
 
 
@@ -68,9 +70,37 @@ WALDO.ShowModule = (function(){
       dataType: 'json',
       contentType: 'application/json',
 
-      success: function() { console.log('done') },
+      success: _showResults,
       error: function() { console.log('error!') }
     });
+  };
+
+
+  function _showResults(game) {
+    WALDO.Timer.stopTimer();
+    WALDO.Tagger.disable();
+    console.log(game)
+    _getHighScores(game.image_id)
+  };
+
+
+  function _getHighScores(this_image_id) {
+    var param = { image_id: this_image_id }
+
+    $.ajax( {
+      url: "http://localhost:3000/games.json",
+      method: 'get',
+      data: param,
+      dataType: 'json',
+      contentType: 'application/json',
+
+      success: _renderHighScores
+    });
+  }
+
+
+  function _renderHighScores(scores) {
+    console.log(scores)
   }
 
 
