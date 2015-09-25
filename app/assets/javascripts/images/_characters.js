@@ -7,19 +7,10 @@ WALDO.Characters = (function() {
   var available;
 
 
-  function init() {
-
-  };
-
-
   function setCharacters(array) {
     characters = array;
   };
 
-
-  function getNames() {
-    return characters.map( function(element) { return element.name} );
-  };
 
   function getName(id) {
     return findCharacter(id).name;
@@ -48,7 +39,6 @@ WALDO.Characters = (function() {
 
   function removeAvailable(name) {
     available = $.grep( available, function(a) { return (a.name !== name) } );
-    //return available.splice(available.indexOf(character),1)
   };
 
 
@@ -66,15 +56,13 @@ WALDO.Characters = (function() {
 
 
   return {
-    init: init,
-    getCharacters: function() { return characters },
     setCharacters: setCharacters,
     getAvailable: function() { return available },
     getAvailableNames: getAvailableNames,
     setAvailable: setAvailable,
     removeAvailable: removeAvailable,
     addAvailable: addAvailable,
-    getNames: getNames,
     getName: getName
   }
+
 })();

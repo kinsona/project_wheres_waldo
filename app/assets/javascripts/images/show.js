@@ -4,9 +4,6 @@ var WALDO = WALDO || {};
 WALDO.ShowModule = (function(){
 
   var _image_id;
-//  var _tags;
-//  var _characters;
-//  var _availableCharacters;
 
 
   function init() {
@@ -25,58 +22,16 @@ WALDO.ShowModule = (function(){
 
 
   function _pullVariables(data) {
-    //_characters = data.characters;
     WALDO.Characters.setCharacters(data.characters);
     WALDO.Tags.setTags(data.tags);
-    //_tags = data.tags
-    //_availableCharacters = _availableCharacters();
 
     var taggedIDs = WALDO.Tags.characterIDs();
     WALDO.Characters.setAvailable(taggedIDs);
 
     WALDO.Tagger.init(WALDO.Characters.getAvailable());
-    //_getTags();
     WALDO.Tags.renderAll();
   };
 
-/*
-  function _getCharacters() {
-    $.ajax( {
-      url: "http://localhost:3000/images/" + _image_id + "/characters.json",
-      method: 'get',
-
-      success: function(data) { CHARACTERS = data }
-    });
-  }
-*/
-/*
-  function _getTags() {
-    $.ajax( {
-      url: "http://localhost:3000/images/" + _image_id + "/tags.json",
-      method: 'get',
-
-      success: WALDO.Tagger.renderAllSavedTags,
-      error: function() { console.log('error!') }
-    });
-  };
-*/
-/*
-  function _getNames(array) {
-    return array.map( function(element) { return element.name} );
-  };
-
-
-  function _availableCharacters() {
-    var charnames = _getNames(_characters);
-    var tagged = _getNames(_tags);
-    // this is not working because _tags doesn't have name
-    console.log(_tags);
-
-    return $.grep(charnames, function(c) {
-      return (tagged.indexOf(c) === -1 )
-    });
-  }
-*/
 
   function saveTag(tagger) {
     $.ajax( {
@@ -87,7 +42,6 @@ WALDO.ShowModule = (function(){
       contentType: 'application/json',
 
       success: WALDO.Tags.addSavedTag,
-      //success: WALDO.Tagger.renderSavedTag,
       error: function() { console.log('error!') }
     });
   };

@@ -5,12 +5,10 @@ WALDO.Tagger = (function(){
 
   var $_playarea;
   var tagger;
-  //var _characters;
 
 
   function init(available_characters) {
     $_playarea = $('.game-wrapper');
-//    _characters = WALDO.Characters.getAvailableNames();
     _enable();
   };
 
@@ -30,7 +28,6 @@ WALDO.Tagger = (function(){
 
 
   function _buildTagger() {
-    // cancel active tagger if it exists
     $('.tagger').remove();
 
     var x = event.offsetX / $_playarea.width();
@@ -91,24 +88,9 @@ WALDO.Tagger = (function(){
     tagger['character'] = event.target.innerHTML;
     WALDO.ShowModule.saveTag(tagger);
 
-    //_characters.splice(_characters.indexOf(tagger.character),1)
-
     $('.dropdown').remove();
     $('.tagger').remove();
   }
-
-
-  function renderSavedTag(tag) {
-    var pixelX = tag.x * $_playarea.width() + $_playarea.offset().left - 24;
-    var pixelY = tag.y * $_playarea.height() + $_playarea.offset().top - 24;
-    $("<div class='tag' data-tag-id='" + tag.id + "'>" + tag.character.name + "</div>").appendTo($_playarea).css('left', pixelX).css('top', pixelY);
-    WALDO.Characters.removeAvailable(tag.character)
-  };
-
-
-  function renderAllSavedTags(tags) {
-    tags.forEach( renderSavedTag );
-  };
 
 
   function _promptDelete() {
@@ -135,8 +117,6 @@ WALDO.Tagger = (function(){
 
   return {
     init: init,
-    renderSavedTag: renderSavedTag,
-    renderAllSavedTags: renderAllSavedTags,
     removeSavedTag: removeSavedTag
   }
 

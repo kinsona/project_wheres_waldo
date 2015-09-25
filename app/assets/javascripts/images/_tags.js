@@ -6,11 +6,6 @@ WALDO.Tags = (function() {
   var tags;
 
 
-  function init() {
-
-  };
-
-
   function setTags(array) {
     tags = array;
   };
@@ -18,12 +13,12 @@ WALDO.Tags = (function() {
 
   function addSavedTag(tag) {
     tags.push(tag);
-    render(tag);
+    _render(tag);
     WALDO.Characters.removeAvailable(tag.character.name)
   };
 
 
-  function ids() {
+  function _ids() {
     return tags.map( function(tag) { return tag.id } );
   };
 
@@ -34,11 +29,11 @@ WALDO.Tags = (function() {
 
 
   function renderAll() {
-    tags.forEach( render );
+    tags.forEach( _render );
   };
 
 
-  function render(tag) {
+  function _render(tag) {
     var $playarea = $('.game-wrapper');
     var characterName = WALDO.Characters.getName(tag.character_id);
 
@@ -49,14 +44,10 @@ WALDO.Tags = (function() {
 
 
   return {
-    init: init,
-    getTags: function() { return tags },
     setTags: setTags,
     addSavedTag: addSavedTag,
-    ids: ids,
     characterIDs: characterIDs,
     renderAll: renderAll,
-    render: render
   }
 
 })();
