@@ -14,7 +14,7 @@ WALDO.ShowModule = (function(){
 
   function _getImageData() {
     $.ajax( {
-      url: "http://localhost:3000/games/" + game_id + ".json",
+      url: game_id + ".json",
       method: 'get',
       success: _pullVariables
     });
@@ -37,7 +37,7 @@ WALDO.ShowModule = (function(){
 
   function saveTag(tagger) {
     $.ajax( {
-      url: "http://localhost:3000/games/" + game_id + "/tags.json",
+      url: game_id + "/tags.json",
       method: 'post',
       data: JSON.stringify(tagger),
       dataType: 'json',
@@ -51,7 +51,7 @@ WALDO.ShowModule = (function(){
 
   function deleteTag(id) {
     $.ajax( {
-      url: "http://localhost:3000/images/" + game_id + "/tags/" + id + ".json",
+      url: game_id + "/tags/" + id + ".json",
       method: 'delete',
 
       success: WALDO.Tagger.removeSavedTag,
@@ -64,7 +64,7 @@ WALDO.ShowModule = (function(){
     var game = { id: game_id };
 
     $.ajax( {
-      url: "http://localhost:3000/games/" + game_id + ".json",
+      url: game_id + ".json",
       method: 'patch',
       data: JSON.stringify(game),
       dataType: 'json',

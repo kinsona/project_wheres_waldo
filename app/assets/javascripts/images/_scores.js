@@ -9,7 +9,7 @@ WALDO.Scores = (function () {
 
   function getHighScores(this_image_id) {
     $.ajax( {
-      url: "http://localhost:3000/games.json",
+      url: "/games.json",
       method: 'get',
       data: { image_id: this_image_id },
       dataType: 'json',
@@ -64,12 +64,10 @@ WALDO.Scores = (function () {
 
 
   function _setNewName(newName) {
-    console.log(name);
-    // update name in front and back ends (default 'anonymous')
     var player = { id: _player_id, name: newName };
 
     $.ajax( {
-      url: "http://localhost:3000/players/" + _player_id + ".json",
+      url: "/players/" + _player_id + ".json",
       method: 'patch',
       data: JSON.stringify( {name: newName} ),
       dataType: 'json',
