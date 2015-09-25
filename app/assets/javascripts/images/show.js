@@ -4,6 +4,7 @@ var WALDO = WALDO || {};
 WALDO.ShowModule = (function(){
 
   var _game_id;
+  var _player_id;
 
 
   function init() {
@@ -113,21 +114,41 @@ WALDO.ShowModule = (function(){
       // highlight current score
       if (score.game_id === _game_id) {
         $("li[data-game-id='" + _game_id + "']").addClass('current');
+        _player_id = score.player_id;
       }
     });
 
     // if this game in list, ask for player name
-    if( $('.current').length === 1) {
+    if( _player_id ) {
       var newName = prompt("You've got one of the fastest times!  Enter your name here for our scoreboard:");
       _setNewName(newName);
     };
   }
 
 
-  function _setNewName(name) {
+  function _setNewName(newName) {
     console.log(name);
     // update name in front and back ends (default 'anonymous')
-  }
+    var player = { id: _player_id, name: newName };
+
+    $.ajax( {
+      url: "http://localhost:3000/players/" + _player_id + ".json",
+      method: 'patch',
+      data: JSON.stringify( {name: newName} ),
+      dataType: 'json',
+      contentType: 'application/json',
+
+      success: _renderNewName,
+      error: function() { console.log('error!') }
+    });
+  };
+
+
+  function _renderNewName(player) {
+    var $current = $('.current');
+    var newText = $current.text().replace('Anonymous', player.name);
+    $current.text(newText);
+  };
 
 
   return {
