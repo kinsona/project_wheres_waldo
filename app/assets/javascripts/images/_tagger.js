@@ -14,7 +14,7 @@ WALDO.Tagger = (function(){
 
 
   function _enable() {
-    $_playarea.on('click', '.game-image', _buildTagger );
+    $_playarea.on('click', '.game-image', _toggleTagger );
     $_playarea.on('click', '.dropdown li', _saveTag );
     $_playarea.on('click', '.tag', _promptDelete );
     $_playarea.on('mouseenter', function() { $('.tag').show() } );
@@ -27,9 +27,17 @@ WALDO.Tagger = (function(){
   };
 
 
-  function _buildTagger() {
-    $('.tagger').remove();
+  function _toggleTagger() {
+    var tagger = $('.tagger');
+    if (tagger.length === 0) {
+      _buildTagger()
+    } else {
+      tagger.remove();
+    };
+  };
 
+
+  function _buildTagger() {
     var x = event.offsetX / $_playarea.width();
     var y = event.offsetY / $_playarea.height();
     tagger = new Tag(x, y);

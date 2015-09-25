@@ -1,3 +1,65 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.game-wrapper {
+  img {
+    max-width: 100%;
+  }
+}
+
+
+.tagger {
+  height: 48px;
+  width: 48px;
+  border: 5px double blue;
+  border-radius: 8px;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+
+.tag {
+  color: transparent;
+  height: 48px;
+  width: 48px;
+  border: 3px solid blue;
+  border-radius: 8px;
+  position: absolute;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+
+.tag:hover {
+  color: blue;
+}
+
+
+.dropdown {
+  padding: 0;
+  margin: 0 0 0 24px;
+  list-style-position: inside;
+  list-style-type: none;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 2px;
+  white-space:nowrap;
+
+  li {
+    padding: 1px 2px;
+    font-size: 16px;
+    line-height: 1em;
+    background-color: lightblue;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: lightgray;
+  }
+}
+
+
+.delete-prompt {
+  border-color: red;
+}

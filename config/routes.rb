@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'images#index'
-
+  root 'games#new'
+=begin
   resources :images, :only => [:index, :show] do
     resources :tags, :only => [:create, :index, :destroy]
     resources :characters, :only => [:index]
   end
+=end
 
   resources :games, :only => [:new, :create, :show] do
     resources :tags, :only => [:create, :index, :destroy]
