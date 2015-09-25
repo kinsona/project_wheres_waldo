@@ -79,7 +79,6 @@ WALDO.ShowModule = (function(){
   function _showResults(game) {
     WALDO.Timer.stopTimer();
     WALDO.Tagger.disable();
-    console.log(game)
     _getHighScores(game.image_id)
   };
 
@@ -98,9 +97,6 @@ WALDO.ShowModule = (function(){
 
 
   function _renderHighScores(scores) {
-    console.log(scores)
-    // if this game in list, ask for player name
-    // update name in front and back ends (default 'anonymous')
     // create a div in center of screen with a list of names/scores
     var $scoreboard = $("<div class='high-scores'></div>")
     $("<h4>Fastest Times</h4>").appendTo($scoreboard);
@@ -111,10 +107,26 @@ WALDO.ShowModule = (function(){
     $scoreboard.appendTo($('.game-wrapper'));
 
     scores.forEach( function(score) {
-      var $listItem = $("<li data-player-id='" + score.player_id + "'></li>");
+      var $listItem = $("<li data-game-id='" + score.game_id + "'></li>");
       $listItem.text( score.name + ": " + score.time ).appendTo($scoreList);
+
+      // highlight current score
+      if (score.game_id === _game_id) {
+        $("li[data-game-id='" + _game_id + "']").addClass('current');
+      }
     });
 
+    // if this game in list, ask for player name
+    if( $('.current').length === 1) {
+      var newName = prompt("You've got one of the fastest times!  Enter your name here for our scoreboard:");
+      _setNewName(newName);
+    };
+  }
+
+
+  function _setNewName(name) {
+    console.log(name);
+    // update name in front and back ends (default 'anonymous')
   }
 
 

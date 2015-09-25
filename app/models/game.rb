@@ -25,6 +25,7 @@ class Game < ActiveRecord::Base
 
     results.map do |game|
       {
+        :game_id => game.id,
         :player_id => game.player.id,
         :name => game.player.name,
         :time => game.time
