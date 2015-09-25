@@ -58,10 +58,27 @@ WALDO.ShowModule = (function(){
   }
 
 
+  function endGame() {
+    var game = { id: _game_id };
+
+    $.ajax( {
+      url: "http://localhost:3000/games/" + _game_id + ".json",
+      method: 'patch',
+      data: JSON.stringify(game),
+      dataType: 'json',
+      contentType: 'application/json',
+
+      success: function() { console.log('done') },
+      error: function() { console.log('error!') }
+    });
+  }
+
+
   return {
     init: init,
     saveTag: saveTag,
-    deleteTag: deleteTag
+    deleteTag: deleteTag,
+    endGame: endGame
   }
 
 })();

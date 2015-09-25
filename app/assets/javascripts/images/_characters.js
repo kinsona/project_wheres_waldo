@@ -39,6 +39,9 @@ WALDO.Characters = (function() {
 
   function removeAvailable(name) {
     available = $.grep( available, function(a) { return (a.name !== name) } );
+    if ( available.length === 0 ) {
+      WALDO.ShowModule.endGame()
+    }
   };
 
 

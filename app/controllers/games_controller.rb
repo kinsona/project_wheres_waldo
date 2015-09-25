@@ -31,4 +31,25 @@ class GamesController < ApplicationController
     end
   end
 
+
+  # To mark end of Game
+  def update
+    @game = Game.find(params[:id])
+    check_tags = (@game.tags.count == @game.characters.count)
+
+    if check_tags && @game.update(:end_time => Time.now)
+      game_data = @game.to_json(:include => [:characters, :tags])
+
+      respond_to do |format|
+        format.json { render :json => game_data, :status => 200 }
+      end
+
+    else
+      respond_to do |format|
+        format.json { render :nothing => true, :status => :unprocessable_entity }
+      end
+
+    end
+  end
+
 end
