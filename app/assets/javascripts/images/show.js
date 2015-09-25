@@ -3,18 +3,18 @@ var WALDO = WALDO || {};
 
 WALDO.ShowModule = (function(){
 
-  var _image_id;
+  var _game_id;
 
 
   function init() {
-    _image_id = $('section').data('image-id');
+    _game_id = $('section').data('game-id');
     _getImageData();
   };
 
 
   function _getImageData() {
     $.ajax( {
-      url: "http://localhost:3000/images/" + _image_id + ".json",
+      url: "http://localhost:3000/games/" + _game_id + ".json",
       method: 'get',
       success: _pullVariables
     });
@@ -35,7 +35,7 @@ WALDO.ShowModule = (function(){
 
   function saveTag(tagger) {
     $.ajax( {
-      url: "http://localhost:3000/images/" + _image_id + "/tags.json",
+      url: "http://localhost:3000/games/" + _game_id + "/tags.json",
       method: 'post',
       data: JSON.stringify(tagger),
       dataType: 'json',
@@ -49,7 +49,7 @@ WALDO.ShowModule = (function(){
 
   function deleteTag(id) {
     $.ajax( {
-      url: "http://localhost:3000/images/" + _image_id + "/tags/" + id + ".json",
+      url: "http://localhost:3000/images/" + _game_id + "/tags/" + id + ".json",
       method: 'delete',
 
       success: WALDO.Tagger.removeSavedTag,

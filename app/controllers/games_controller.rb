@@ -1,19 +1,27 @@
-class ImagesController < ApplicationController
+class GamesController < ApplicationController
 
-  def index
+  def new
+    @game = Game.new
+  end
+
+
+  def create
+    @game = Game.new
+    @game.create_player
+    @game.start_time = @game.created_at
+    @game.image = Image.first
+
+    if @game.save
+      redirect_to @game
+    else
+      render :new
+    end
+
   end
 
 
   def show
-    @game = Game.new
-    @game.create_player
-    @game.start_time = @game.created_at
-
-    @image = Image.find(params[:id])
-    @game.image = @image
-
-    @game.save!
-
+    @game = Game.find(params[:id])
 
     game_data = @game.to_json(:include => [:characters, :tags])
 

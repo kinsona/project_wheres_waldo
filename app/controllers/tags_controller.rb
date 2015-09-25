@@ -2,8 +2,8 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new
-    @tag.image = Image.first
-    @tag.player = Player.first
+    @tag.game = Game.find(params[:game_id])
+    @tag.player = @tag.game.player
     @tag.x = params[:x]
     @tag.y = params[:y]
     @tag.character = Character.find_by_name(params[:character])
@@ -24,7 +24,7 @@ class TagsController < ApplicationController
 
 
   def index
-    @tags = Image.find(params[:image_id]).tags
+    @tags = Game.find(params[:game_id]).tags
 
     tag_data = @tags.to_json(:include => :character)
 
