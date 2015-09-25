@@ -27,7 +27,13 @@ WALDO.Characters = (function() {
 
 
   function findCharacter(id) {
-    var results = $.grep( characters, function(c) { return (c.id === id) } )
+    var results = $.grep( characters, function(c) { return (c.id === id) } );
+    return results[0];
+  };
+
+
+  function findByName(name) {
+    var results = $.grep( characters, function(c) { return (c.name === name) } );
     return results[0];
   };
 
@@ -41,12 +47,13 @@ WALDO.Characters = (function() {
 
 
   function removeAvailable(name) {
-    return available.splice(available.indexOf(name),1)
+    available = $.grep( available, function(a) { return (a.name !== name) } );
+    //return available.splice(available.indexOf(character),1)
   };
 
 
-  function addAvailable(id) {
-    var character = findCharacter(id);
+  function addAvailable(name) {
+    var character = findByName(name);
     if (available.indexOf(character) === -1) {
       available.push(character);
     };

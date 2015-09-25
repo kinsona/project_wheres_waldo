@@ -5,12 +5,12 @@ WALDO.Tagger = (function(){
 
   var $_playarea;
   var tagger;
-  var _characters;
+  //var _characters;
 
 
   function init(available_characters) {
     $_playarea = $('.game-wrapper');
-    _characters = WALDO.Characters.getAvailableNames();
+//    _characters = WALDO.Characters.getAvailableNames();
     _enable();
   };
 
@@ -125,8 +125,9 @@ WALDO.Tagger = (function(){
 
 
   function removeSavedTag(id) {
-    $("div[data-tag-id='" + id + "']").remove()
-    WALDO.Characters.addAvailable(id);
+    $tagDiv = $("div[data-tag-id='" + id + "']");
+    WALDO.Characters.addAvailable($tagDiv.text());
+    $tagDiv.remove()
   };
 
 

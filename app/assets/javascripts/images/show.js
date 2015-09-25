@@ -86,7 +86,8 @@ WALDO.ShowModule = (function(){
       dataType: 'json',
       contentType: 'application/json',
 
-      success: WALDO.Tagger.renderSavedTag,
+      success: WALDO.Tags.addSavedTag,
+      //success: WALDO.Tagger.renderSavedTag,
       error: function() { console.log('error!') }
     });
   };

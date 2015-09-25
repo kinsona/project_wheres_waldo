@@ -16,6 +16,13 @@ WALDO.Tags = (function() {
   };
 
 
+  function addSavedTag(tag) {
+    tags.push(tag);
+    render(tag);
+    WALDO.Characters.removeAvailable(tag.character.name)
+  };
+
+
   function ids() {
     return tags.map( function(tag) { return tag.id } );
   };
@@ -45,6 +52,7 @@ WALDO.Tags = (function() {
     init: init,
     getTags: function() { return tags },
     setTags: setTags,
+    addSavedTag: addSavedTag,
     ids: ids,
     characterIDs: characterIDs,
     renderAll: renderAll,
