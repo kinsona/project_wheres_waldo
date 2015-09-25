@@ -33,3 +33,35 @@ end
 p = Player.new
 p.name = "Tester"
 p.save!
+
+
+
+# List of official answers for each character's location on each image
+
+              #image name                   #char name
+locations = { "The Gobbling Gluttons" =>  {
+                                            "Waldo" => { x: 0.57096, y: 0.35195 },
+                                            "Wenda" => { x: 0.39048, y: 0.32857 },
+                                            "Odlaw" => { x: 0.40426, y: 0.60169 },
+                                "Wizard Whitebeard" => { x: 0.85152, y: 0.84805 },
+                                             "Woof" => { x: 0.68418, y: 0.61433 }
+                                          }
+            }
+
+
+
+# Add X & Y coordinates to each ImageCharacter row based on the above hash
+locations.each do |image_name, character_hash|
+
+  image_id = Image.find_by_name(image_name).id
+
+  character_hash.each do |character_name, coordinates|
+
+    character_id = Character.find_by_name(character_name).id
+
+    ic = ImageCharacter.where(:image_id => image_id, :character_id => character_id).first
+    ic.x = coordinates[:x]
+    ic.y = coordinates[:y]
+    ic.save!
+  end
+end
