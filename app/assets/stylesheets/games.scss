@@ -2,100 +2,138 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-header {
-  text-align: center;
 
-  h1 {
-    margin-bottom: 4px;
-  }
-}
+#new {
 
-
-.column {
-  display: inline-block;
-  margin: 0 10px;
-  line-height: 1.5em;
-  width: 100px;
-}
-
-
-.game-wrapper {
-  img {
-    max-width: 100%;
-  }
-}
-
-
-.tagger {
-  height: 48px;
-  width: 48px;
-  border: 5px double blue;
-  border-radius: 8px;
-  position: absolute;
-  box-sizing: border-box;
-}
-
-
-.tag {
-  color: transparent;
-  height: 48px;
-  width: 48px;
-  border: 3px solid blue;
-  border-radius: 8px;
-  position: absolute;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-
-.tag:hover {
-  color: blue;
-}
-
-
-.dropdown {
-  padding: 0;
-  margin: 0 0 0 24px;
-  list-style-position: inside;
-  list-style-type: none;
-  position: absolute;
-  border: 1px solid black;
-  border-radius: 2px;
-  white-space:nowrap;
-
-  li {
-    padding: 1px 2px;
-    font-size: 16px;
-    line-height: 1em;
-    background-color: lightblue;
-    cursor: pointer;
-  }
-
-  li:hover {
-    background-color: lightgray;
-  }
-}
-
-
-.delete-prompt {
-  border-color: red;
-}
-
-
-.high-scores {
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  background-color: lightblue;
-  padding: 0 16px;
-  border: 2px solid #666;
-  border-radius: 4px;
-
-  h4 {
+  h1, h4 {
     text-align: center;
   }
 
-  .current {
-    background-color: yellow;
+  h4 {
+    margin-bottom: 6px;
+  }
+
+  .levels-container {
+    margin: 18px auto;
+    text-align: center;
+  }
+
+  .level-wrapper {
+    margin: 0px auto;
+    display: inline-block;
+  }
+
+  .thumbnail {
+    border: 2px solid #333;
+    border-radius: 2px;
+    box-sizing: border-box;
+    max-height: 256px;
+    //display: inline;
+  }
+
+  .thumbnail:hover {
+    border-color: blue;
+  }
+}
+
+
+#show {
+
+  header {
+    text-align: center;
+
+    h1 {
+      margin-bottom: 4px;
+    }
+  }
+
+
+  .column {
+    display: inline-block;
+    margin: 0 10px;
+    line-height: 1.5em;
+    width: 100px;
+  }
+
+
+  .game-wrapper {
+    img {
+      max-width: 100%;
+    }
+  }
+
+
+  .tagger {
+    height: 48px;
+    width: 48px;
+    border: 5px double blue;
+    border-radius: 8px;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+
+  .tag {
+    color: transparent;
+    height: 48px;
+    width: 48px;
+    border: 3px solid blue;
+    border-radius: 8px;
+    position: absolute;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+
+  .tag:hover {
+    color: blue;
+  }
+
+
+  .dropdown {
+    padding: 0;
+    margin: 0 0 0 24px;
+    list-style-position: inside;
+    list-style-type: none;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 2px;
+    white-space:nowrap;
+
+    li {
+      padding: 1px 2px;
+      font-size: 16px;
+      line-height: 1em;
+      background-color: lightblue;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background-color: lightgray;
+    }
+  }
+
+
+  .delete-prompt {
+    border-color: red;
+  }
+
+
+  .high-scores {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    background-color: lightblue;
+    padding: 0 16px;
+    border: 2px solid #666;
+    border-radius: 4px;
+
+    h4 {
+      text-align: center;
+    }
+
+    .current {
+      background-color: yellow;
+    }
   }
 }

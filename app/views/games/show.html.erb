@@ -1,22 +1,26 @@
-<header>
+<main id='show'>
 
-  <h1>Where's Waldo?</h1>
+  <header>
 
-    <div class='column timer'>
-      Time: 0
+    <h1>Where's Waldo?</h1>
+
+      <div class='column timer'>
+        Time: 0
+      </div>
+
+      <div class='column'>
+        <%= link_to 'New Game', games_path, method: :post %>
+      </div>
+
+  </header>
+
+
+  <section data-game-id='<%= @game.id %>'>
+
+    <div class='game-wrapper'>
+      <%= image_tag "ww_giant_image.jpg", class: 'game-image' %>
     </div>
 
-    <div class='column'>
-      <%= link_to 'New Game', games_path, method: :post %>
-    </div>
+  </section>
 
-</header>
-
-
-<section data-game-id='<%= @game.id %>'>
-
-  <div class='game-wrapper'>
-    <%= image_tag "ww_giant_image.jpg", class: 'game-image' %>
-  </div>
-
-</section>
+</main>

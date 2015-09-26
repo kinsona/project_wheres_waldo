@@ -46,6 +46,11 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  gem 'better_errors'
+end
+gem 'binding_of_caller'
+
 group :production do
   gem "rails_12factor"
 end

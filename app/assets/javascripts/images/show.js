@@ -95,5 +95,9 @@ WALDO.ShowModule = (function(){
 
 
 $(document).ready(function(){
-  WALDO.ShowModule.init();
+
+  if( $("[data-controller='games'][data-action='show']").length === 1 ) {
+    WALDO.ShowModule.init();
+  };
+
 })
