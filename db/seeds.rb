@@ -16,6 +16,7 @@ Player.delete_all
 
 i = Image.new
 i.name = "The Gobbling Gluttons"
+i.filename = "ww_giant_image.jpg"
 
 i.save!
 

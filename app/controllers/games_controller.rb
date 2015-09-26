@@ -36,7 +36,10 @@ class GamesController < ApplicationController
   # To mark end of Game
   def update
     @game = Game.find(params[:id])
+
+    # make this a helper that checks if tags within actual locations
     check_tags = (@game.tags.count == @game.characters.count)
+
 
     if check_tags && @game.update(:end_time => Time.now)
       game_data = @game.to_json(:include => [:characters, :tags])
@@ -47,6 +50,7 @@ class GamesController < ApplicationController
 
     else
       respond_to do |format|
+                                        # shared js to say 'sorry you lose'
         format.json { render :nothing => true, :status => :unprocessable_entity }
       end
 
