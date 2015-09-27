@@ -37,11 +37,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
 
-    # make this a helper that checks if tags within actual locations
-    check_tags = (@game.tags.count == @game.characters.count)
-
-
-    if check_tags && @game.update(:end_time => Time.now)
+    if @game.check_tags && @game.update(:end_time => Time.now)
       game_data = @game.to_json(:include => [:characters, :tags])
 
       respond_to do |format|
