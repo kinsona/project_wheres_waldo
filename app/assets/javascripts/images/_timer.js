@@ -8,6 +8,7 @@ WALDO.Timer = (function() {
       _lastTick,
       _timeInterval
 
+// timer should recalc time since start when refresh
   function startTimer() {
     $_timer = $('.timer');
     _timer = 0;
