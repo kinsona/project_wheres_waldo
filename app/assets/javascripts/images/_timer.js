@@ -9,9 +9,9 @@ WALDO.Timer = (function() {
       _timeInterval
 
 // timer should recalc time since start when refresh
-  function startTimer() {
+  function startTimer(start_time) {
     $_timer = $('.timer');
-    _timer = 0;
+    _timer = (Date.now() - Date.parse(start_time))/1000;
     _lastTick = Date.now();
     _timeInterval = setInterval( _tick, 1000);
   };

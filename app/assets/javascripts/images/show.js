@@ -30,8 +30,8 @@ WALDO.ShowModule = (function(){
 
     WALDO.Tagger.init(WALDO.Characters.getAvailable());
     WALDO.Tags.renderAll();
-
-    WALDO.Timer.startTimer();
+    console.log(data);
+    WALDO.Timer.startTimer(data.start_time);
   };
 
 
