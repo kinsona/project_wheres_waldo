@@ -86,8 +86,15 @@ WALDO.Scores = (function () {
   };
 
 
+  function gameNotOver() {
+    var $message = $("<h3 class='message'>Looks like you missed someone.  Keep trying...</h3>");
+    $message.prependTo($('.game-wrapper')).fadeOut(3500);
+  };
+
+
   return {
-    getHighScores: getHighScores
+    getHighScores: getHighScores,
+    gameNotOver: gameNotOver
   }
 
 })();

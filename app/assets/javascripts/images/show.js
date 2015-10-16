@@ -71,7 +71,7 @@ WALDO.ShowModule = (function(){
       contentType: 'application/json',
 
       success: _showResults,
-      error: function() { console.log('error!') }
+      error: _showIncomplete
     });
   };
 
@@ -80,6 +80,11 @@ WALDO.ShowModule = (function(){
     WALDO.Timer.stopTimer();
     WALDO.Tagger.disable();
     WALDO.Scores.getHighScores(game.image_id)
+  };
+
+
+  function _showIncomplete() {
+    WALDO.Scores.gameNotOver();
   };
 
 

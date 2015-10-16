@@ -13,7 +13,7 @@ Your answers and time will be stored in our database.  See if you can beat the c
 
 
 #### Unfinished Business:
-* Add warning message when all tags complete but at least one is invalid
+* Timer needs to persist after refresh
 * Add New Relic to Heroku to keep dyno alive
 * Add more levels
 * Distribute to friends & family

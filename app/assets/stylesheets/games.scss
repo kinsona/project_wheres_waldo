@@ -120,9 +120,11 @@
 
 
   .high-scores {
-    position: absolute;
-    top: 2%;
-    left: 2%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
     background-color: lightblue;
     padding: 0 16px;
     border: 2px solid #666;
@@ -135,5 +137,18 @@
     .current {
       background-color: yellow;
     }
+  }
+
+
+  .message {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid blue;
+    border-radius: 4px;
+    background-color: #fff;
+    color: red;
+    padding: 4px 8px;
   }
 }
